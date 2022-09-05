@@ -10,10 +10,14 @@ module.exports = {
         use: "ts-loader",
         include: [path.resolve(__dirname, "src")],
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
     ],
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".js", ".scss"],
   },
   output: {
     filename: "bundle.js",
