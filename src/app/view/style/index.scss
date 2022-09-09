@@ -1,3 +1,150 @@
 body {
-  background: red;
+  display: flex;
+}
+
+.left {
+  width: 27.5%;
+  height: 100vh;
+  background: #071319;
+  justify-items: center;
+}
+
+.sound {
+  position: relative;
+  left: 40%;
+  margin-top: 17%;
+  margin-bottom: 30%;
+  border: none;
+  background: #071319;
+  cursor: pointer;
+}
+
+.timer {
+  position: relative;
+  left: 35%;
+  width: 100px;
+  height: 100px;
+  border: 10px solid #e1a02e;
+  border-radius: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.time {
+  position: relative;
+  top: 16%;
+  font-size: 48px;
+  line-height: 58px;
+  font-family: "Inter";
+  font-weight: 400;
+  font-style: normal;
+  color: #ffffff;
+}
+
+.mid {
+  width: 45%;
+  height: 100vh;
+  background: #071319;
+  text-align: center;
+  justify-content: center;
+}
+
+.life-rings {
+  display: flex;
+  margin: 10% 20% 0% 20%;
+  justify-content: space-around;
+}
+.life-ring {
+  border: 1px solid #e1a02e;
+  border-radius: 50px;
+  width: 100px;
+  height: 60px;
+  padding: 8px;
+  background: radial-gradient(50% 50% at 50% 50%, #050351 0%, rgba(5, 3, 81, 0) 100%);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Inter";
+  font-weight: 700;
+  font-style: normal;
+  color: #e1a02e;
+}
+
+.logo {
+  max-width: 100%;
+}
+.question {
+  margin-bottom: 30px;
+  width: 100%;
+  font-size: 24px;
+  line-height: 29px;
+  font-family: "Inter";
+  font-weight: 400;
+  font-style: normal;
+  color: #ffffff;
+}
+
+.answers {
+  flex-wrap: wrap;
+  display: flex;
+  text-align: justify;
+  justify-content: space-between;
+}
+.answer {
+  margin-bottom: 2%;
+  border: 1px solid #e1a02e;
+  width: 47%;
+  height: 35px;
+  border-radius: 50px;
+  background: radial-gradient(50% 50% at 50% 50%, #050351 0%, rgba(5, 3, 81, 0) 100%);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Inter";
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+}
+
+.option {
+  color: #e1a02e;
+  pointer-events: none;
+}
+button :hover {
+  background: #e1a02e;
+  color: black;
+}
+
+.right {
+  width: 27.5%;
+  height: 100vh;
+  padding-left: 30px;
+  background: #071319;
+}
+
+.option-index {
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Inter";
+  font-weight: 400;
+  font-style: normal;
+  color: #e1a02e;
+}
+
+.price-list {
+  margin-top: 15%;
+}
+.question-list {
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Inter";
+  font-weight: 400;
+  font-style: normal;
+  color: #e1a02e;
+}
+
+.question-5,
+.question-10,
+.question-15 {
+  color: #ffffff;
 }
