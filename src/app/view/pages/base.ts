@@ -96,33 +96,31 @@ export class LeftPart {
     const prices = document.createElement("div");
     prices.classList.add("price-list");
     right.appendChild(prices);
+
     const priceList = [
-      "100",
-      "200",
-      "300",
-      "500",
-      "1 000",
-      "2 000",
-      "4 000",
-      "8 000",
-      "16 000",
-      "32 000",
-      "64 000",
-      "125 000",
-      "250 000",
-      "500 000",
       "1 000 000",
+      "500 000",
+      "250 000",
+      "125 000",
+      "64 000",
+      "32 000",
+      "16 000",
+      "8 000",
+      "4 000",
+      "2 000",
+      "1 000",
+      "500",
+      "300",
+      "200",
+      "100",
     ];
 
-    priceList.reverse().forEach((item) => {
+    priceList.forEach((item, index) => {
       const singlePrice = document.createElement("p");
       singlePrice.classList.add("price-list__item");
-      singlePrice.classList.add(`price-list__item--${priceList.reverse().indexOf(item) + 1}`);
-      singlePrice.innerText = `${priceList.indexOf(item) + 1}. `;
-      priceList.reverse();
-      singlePrice.innerText += `$ ${item}`;
+      singlePrice.classList.add(`price-list__item--${priceList.length - index}`);
+      singlePrice.innerText = `${priceList.length - index}. $ ${item}`;
       prices.appendChild(singlePrice);
-      console.log(item);
     });
   }
 }
