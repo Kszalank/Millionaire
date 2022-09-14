@@ -39,19 +39,19 @@ export class LeftPart {
     mid.appendChild(lifeRings);
     // --LIFE RING BUTTONS
     const button1 = document.createElement("button");
-    button1.classList.add("life-ring");
-    button1.classList.add("fiftyfifty");
+    button1.classList.add("life-rings__option");
+    button1.classList.add("life-rings__option--fiftyfifty");
     button1.innerText = "50:50";
     lifeRings.appendChild(button1);
     const button2 = document.createElement("button");
-    button2.classList.add("life-ring");
+    button2.classList.add("life-rings__option");
+    button2.classList.add("life-rings__option--telephone");
     button2.innerHTML = `<img src=${phone} alt="phone">`;
-    button2.classList.add("telephone");
     lifeRings.appendChild(button2);
     const button3 = document.createElement("button");
-    button3.classList.add("life-ring");
+    button3.classList.add("life-rings__option");
+    button3.classList.add("life-rings__option--audience");
     button3.innerHTML = `<img src=${audience} alt="audience">`;
-    button3.classList.add("audience");
     lifeRings.appendChild(button3);
     // LOGO
     const logo = document.createElement("div");
@@ -59,44 +59,44 @@ export class LeftPart {
     logo.innerHTML = `<img src=${backgroundLogo} alt="logo">`;
     mid.appendChild(logo);
     //-QUESTION
-    const Question = document.createElement("div");
-    Question.classList.add("question");
-    Question.innerText = "Odor-Eaters are designed to be used where?";
-    mid.appendChild(Question);
+    const question = document.createElement("div");
+    question.classList.add("question");
+    question.innerText = "Odor-Eaters are designed to be used where?";
+    mid.appendChild(question);
     //-ANSWERS DIV
-    const AnswersDiv = document.createElement("div");
-    AnswersDiv.classList.add("answers");
-    mid.appendChild(AnswersDiv);
+    const answersDiv = document.createElement("div");
+    answersDiv.classList.add("answers");
+    mid.appendChild(answersDiv);
     //--ANSWER BUTTONS
     const buttonA = document.createElement("button");
-    buttonA.classList.add("answer");
-    buttonA.classList.add("answer-A");
-    buttonA.innerHTML = `<span class="option option-index-A">A: </span>AnswerA`;
-    AnswersDiv.appendChild(buttonA);
+    buttonA.classList.add("answers__option");
+    buttonA.classList.add("answers__option--A");
+    buttonA.innerHTML = `<span class="index option-index-A">A: </span>AnswerA`;
+    answersDiv.appendChild(buttonA);
     const buttonB = document.createElement("button");
-    buttonB.classList.add("answer");
-    buttonB.classList.add("answer-B");
-    buttonB.innerHTML = `<span class="option option-index-B">B: </span>AnswerB`;
-    AnswersDiv.appendChild(buttonB);
+    buttonB.classList.add("answers__option");
+    buttonB.classList.add("answers__option--B");
+    buttonB.innerHTML = `<span class="index option-index-B">B: </span>AnswerB`;
+    answersDiv.appendChild(buttonB);
     const buttonC = document.createElement("button");
-    buttonC.classList.add("answer");
-    buttonC.classList.add("answer-C");
-    buttonC.innerHTML = `<span class="option option-index-C">C: </span>AnswerC`;
-    AnswersDiv.appendChild(buttonC);
+    buttonC.classList.add("answers__option");
+    buttonC.classList.add("answers__option--C");
+    buttonC.innerHTML = `<span class="index option-index-C">C: </span>AnswerC`;
+    answersDiv.appendChild(buttonC);
     const buttonD = document.createElement("button");
-    buttonD.classList.add("answer");
-    buttonD.classList.add("answer-D");
-    buttonD.innerHTML = `<span class="option option-index-D">D: </span>AnswerD`;
-    AnswersDiv.appendChild(buttonD);
+    buttonD.classList.add("answers__option");
+    buttonD.classList.add("answers__option--D");
+    buttonD.innerHTML = `<span class="index option-index-D">D: </span>AnswerD`;
+    answersDiv.appendChild(buttonD);
 
     //RIGHT CONTAINER
     const right = document.createElement("div");
     right.classList.add("right");
     document.body.appendChild(right);
-    const Prices = document.createElement("div");
-    Prices.classList.add("price-list");
-    right.appendChild(Prices);
-    const PriceList = [
+    const prices = document.createElement("div");
+    prices.classList.add("price-list");
+    right.appendChild(prices);
+    const priceList = [
       "100",
       "200",
       "300",
@@ -113,13 +113,16 @@ export class LeftPart {
       "500 000",
       "1 000 000",
     ];
-    for (let i = PriceList.length - 1; i >= 0; i--) {
-      console.log(PriceList[i]);
+
+    priceList.reverse().forEach((item) => {
       const singlePrice = document.createElement("p");
-      singlePrice.classList.add("question-list");
-      singlePrice.classList.add(`question-${PriceList.indexOf(PriceList[i]) + 1}`);
-      singlePrice.innerText = `${PriceList.indexOf(PriceList[i]) + 1}. $ ${PriceList[i]}`;
-      Prices.appendChild(singlePrice);
-    }
+      singlePrice.classList.add("price-list__item");
+      singlePrice.classList.add(`price-list__item--${priceList.reverse().indexOf(item) + 1}`);
+      singlePrice.innerText = `${priceList.indexOf(item) + 1}. `;
+      priceList.reverse();
+      singlePrice.innerText += `$ ${item}`;
+      prices.appendChild(singlePrice);
+      console.log(item);
+    });
   }
 }
