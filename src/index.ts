@@ -1,3 +1,3 @@
-import { LeftPart } from "./app/view/pages/base";
-import "./app/view/style/index.scss";
-LeftPart.render();
+import { Base } from "./app/view/pages/base";
+import "./style/index.scss";
+Base.render();
