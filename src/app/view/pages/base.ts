@@ -39,7 +39,6 @@ export class Base {
     const quiz = new QuizModel(questionsList);
     quiz.startQuiz();
     quiz.setNextQuestion();
-    quiz.setNextQuestion();
     quiz.stopQuiz();
   }
 }

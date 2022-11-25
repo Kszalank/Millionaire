@@ -1,22 +1,35 @@
-import { questionsList } from "../view/components/Question/constants";
 import { QuestionModel } from "../model/Question";
-interface QuizData {}
-export class QuizModel {
-  constructor(private data: QuizData) {}
 
-  currentQuestion: any;
+interface QuizData {
+  question: string;
+  wrongAnswers: string[];
+  rightAnswer: string;
+}
+
+export class QuizModel {
+  currentQuestion: QuestionModel | null = null;
+  allQuestions: QuizData[] = [];
+
+  constructor(private data: QuizData[]) {}
 
   startQuiz() {
+    this.allQuestions = [...this.data];
     this.setNextQuestion();
   }
 
   setNextQuestion() {
-    const numberOfQuestions = questionsList.length;
+    const numberOfQuestions = this.data.length;
     const random = Math.floor(Math.random() * numberOfQuestions);
-    this.currentQuestion = new QuestionModel(questionsList[random]);
-    this.currentQuestion.isAnsweredCorrectly(questionsList[random].rightAnswer);
-    questionsList.splice(random, 1);
+    this.currentQuestion = new QuestionModel(this.data[random]);
+    this.data.splice(random, 1);
   }
 
-  stopQuiz() {}
+  isCorrectAnswerToCurrentQuestion(answer: string): boolean {
+    if (this.currentQuestion === null) return false;
+    return this.currentQuestion.isAnsweredCorrectly(answer);
+  }
+
+  stopQuiz() {
+    this.data = [...this.allQuestions];
+  }
 }
