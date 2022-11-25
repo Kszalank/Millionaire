@@ -1,4 +1,4 @@
-const questionsList = [
+export const questionsList = [
   {
     question: " From 1964 to 1985, who asked you not to squeeze the Charmin?",
     wrongAnswers: ["Mrs. Potts", "Mr. Rogers", "Mrs. Fields"],
