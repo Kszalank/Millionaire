@@ -1,4 +1,5 @@
 import { QuestionModel } from "../model/Question";
+import { LifeLineModel } from "./LifeLine";
 
 interface QuizData {
   question: string;
@@ -9,12 +10,16 @@ interface QuizData {
 export class QuizModel {
   currentQuestion: QuestionModel | null = null;
   allQuestions: QuizData[] = [];
+  lifeLine: LifeLineModel | null = null;
 
   constructor(private data: QuizData[]) {}
 
   startQuiz() {
     this.allQuestions = [...this.data];
     this.setNextQuestion();
+    if (this.currentQuestion) {
+      this.lifeLine = new LifeLineModel();
+    }
   }
 
   setNextQuestion() {
@@ -25,8 +30,13 @@ export class QuizModel {
   }
 
   isCorrectAnswerToCurrentQuestion(answer: string): boolean {
-    if (this.currentQuestion === null) return false;
-    return this.currentQuestion.isAnsweredCorrectly(answer);
+    return !!this.currentQuestion?.isAnsweredCorrectly(answer);
+  }
+
+  useLifeLine(lifeLineOption: string) {
+    this.lifeLine?.disableLifeLine(lifeLineOption);
+    console.log(this.lifeLine);
+    return this.currentQuestion?.getQuestionData().rightAnswer;
   }
 
   stopQuiz() {
