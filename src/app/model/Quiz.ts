@@ -33,9 +33,8 @@ export class QuizModel {
     return !!this.currentQuestion?.isAnsweredCorrectly(answer);
   }
 
-  useLifeLine(lifeLineOption: string) {
+  useLifeLine(lifeLineOption: "50:50" | "friend" | "audience") {
     this.lifeLine?.disableLifeLine(lifeLineOption);
-    console.log(this.lifeLine);
     return this.currentQuestion?.getQuestionData().rightAnswer;
   }
 
