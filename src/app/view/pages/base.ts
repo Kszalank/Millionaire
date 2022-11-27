@@ -4,7 +4,6 @@ import { Timer } from "../components//Timer";
 import { LifeRings } from "../components/Lifelines/LifelineButton";
 import { Question } from "../components/Question/Question";
 import { MoneyPrizeList } from "../components/MoneyPrizeList/MoneyPrizeList";
-import { QuestionModel } from "../../model/Question";
 import { QuizModel } from "../../model/Quiz";
 import { questionsList } from "../components/Question/constants";
 export const left = document.createElement("div");
@@ -38,7 +37,16 @@ export class Base {
 
     const quiz = new QuizModel(questionsList);
     quiz.startQuiz();
+    const x = quiz.useLifeLine("friend");
+    console.log(quiz.isCorrectAnswerToCurrentQuestion(x || ""));
     quiz.setNextQuestion();
+    const y = quiz.useLifeLine("50:50");
+    console.log(quiz.isCorrectAnswerToCurrentQuestion(y || ""));
+    quiz.setNextQuestion();
+    const z = quiz.useLifeLine("audience");
+    console.log(quiz.isCorrectAnswerToCurrentQuestion(z || ""));
+    quiz.setNextQuestion();
+    quiz.useLifeLine("audience");
     quiz.stopQuiz();
   }
 }
