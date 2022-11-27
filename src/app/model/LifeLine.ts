@@ -1,5 +1,4 @@
-type LifeLine = "50:50" | "friend" | "audience";
-console.log("d");
+export type LifeLine = "50:50" | "friend" | "audience";
 export class LifeLineModel {
   availableLifeLines: LifeLine[] = ["50:50", "friend", "audience"];
 

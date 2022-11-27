@@ -1,5 +1,6 @@
 import { QuestionModel } from "../model/Question";
 import { LifeLineModel } from "./LifeLine";
+import { LifeLine } from "../model/LifeLine";
 
 interface QuizData {
   question: string;
@@ -33,7 +34,7 @@ export class QuizModel {
     return !!this.currentQuestion?.isAnsweredCorrectly(answer);
   }
 
-  useLifeLine(lifeLineOption: "50:50" | "friend" | "audience") {
+  useLifeLine(lifeLineOption: LifeLine) {
     this.lifeLine?.disableLifeLine(lifeLineOption);
     return this.currentQuestion?.getQuestionData().rightAnswer;
   }
