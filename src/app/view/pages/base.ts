@@ -2,10 +2,10 @@ import backgroundLogo from "../../../assets/img/background_logo.svg";
 import { AudioToggle } from "../components/AudioToggle";
 import { Timer } from "../components//Timer";
 import { LifeRings } from "../components/Lifelines/LifelineButton";
-import { Question } from "../components/Question/Question";
 import { MoneyPrizeList } from "../components/MoneyPrizeList/MoneyPrizeList";
 import { QuizModel } from "../../model/Quiz";
 import { questionsList } from "../components/Question/constants";
+import { QuestionPresenter } from "../../presenter/QuestionPresenter";
 export const left = document.createElement("div");
 export const mid = document.createElement("div");
 export const right = document.createElement("div");
@@ -17,7 +17,7 @@ export class Base {
     const audioToggle = AudioToggle.render();
     const timer = Timer.render();
     const lifeRings = LifeRings.render();
-    const question = Question.render();
+    // const question = Question.render();
     const moneyPrizeList = MoneyPrizeList.render();
     left.classList.add("left");
     document.body.appendChild(left);
@@ -30,7 +30,7 @@ export class Base {
     logo.classList.add("logo");
     logo.innerHTML = `<img src=${backgroundLogo} alt="logo">`;
     mid.appendChild(logo);
-    mid.appendChild(question);
+    // mid.appendChild(question);
     right.classList.add("right");
     document.body.appendChild(right);
     right.appendChild(moneyPrizeList);
@@ -46,7 +46,13 @@ export class Base {
     const z = quiz.useLifeLine("audience");
     console.log(quiz.isCorrectAnswerToCurrentQuestion(z || ""));
     quiz.setNextQuestion();
-    quiz.useLifeLine("audience");
     quiz.stopQuiz();
+
+    const cQ = quiz.getCurrentQuestion();
+    console.log(cQ);
+    if (cQ) {
+      const questionPresenter = new QuestionPresenter(cQ);
+      questionPresenter.initialize();
+    }
   }
 }
