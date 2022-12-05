@@ -17,11 +17,9 @@ export class Question {
     question.innerText = this.data.question;
 
     questionAndAnswers.appendChild(question);
-    //-ANSWERS DIV
     const answersDiv = document.createElement("div");
     answersDiv.classList.add("answers");
     questionAndAnswers.appendChild(answersDiv);
-    //--ANSWER BUTTONS
 
     this.data.answers.forEach((answer, index) => {
       const button = new QuestionButton(String.fromCharCode(65 + index), answer, this.data.onAnswerClick);

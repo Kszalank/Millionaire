@@ -38,7 +38,6 @@ export class QuizModel {
   }
 
   stopQuiz() {
-    console.log(this.currentQuestion?.getQuestionData());
     this.data = [...this.allQuestions];
   }
 
