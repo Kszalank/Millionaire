@@ -18,9 +18,7 @@ export class QuizModel {
   startQuiz() {
     this.allQuestions = [...this.data];
     this.setNextQuestion();
-    if (this.currentQuestion) {
-      this.lifeLine = new LifeLineModel();
-    }
+    this.lifeLine = new LifeLineModel();
   }
 
   setNextQuestion() {
@@ -41,5 +39,11 @@ export class QuizModel {
 
   stopQuiz() {
     this.data = [...this.allQuestions];
+  }
+
+  getCurrentQuestion() {
+    if (this.currentQuestion) {
+      return this.currentQuestion;
+    }
   }
 }
