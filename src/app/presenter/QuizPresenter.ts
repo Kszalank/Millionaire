@@ -41,7 +41,6 @@ export class QuizPresenter {
     } else {
       alert("WRONG ANSWER");
       this.quiz?.stopQuiz();
-      window.location.reload();
     }
   }
 }

@@ -20,10 +20,16 @@ export class Question {
     const answersDiv = document.createElement("div");
     answersDiv.classList.add("answers");
     questionAndAnswers.appendChild(answersDiv);
-
+    const currentQuestionAnswersList = [...this.data.answers];
     this.data.answers.forEach((answer, index) => {
-      const button = new QuestionButton(String.fromCharCode(65 + index), answer, this.data.onAnswerClick);
+      const random = Math.floor(Math.random() * currentQuestionAnswersList.length);
+      const button = new QuestionButton(
+        String.fromCharCode(65 + index),
+        currentQuestionAnswersList[random],
+        this.data.onAnswerClick
+      );
       answersDiv.appendChild(button.render());
+      currentQuestionAnswersList.splice(random, 1);
     });
     return questionAndAnswers;
   }
