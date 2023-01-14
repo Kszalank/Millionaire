@@ -4,9 +4,11 @@ export class AudioToggle {
 
   static render() {
     const muteButton = document.createElement("button");
+    muteButton.id = "muteButton";
     muteButton.classList.add("sound");
     const muteButtonImage = document.createElement("img");
     muteButtonImage.classList.add("sound");
+    muteButtonImage.id = "mute";
     muteButtonImage.src = muteIcon;
     muteButtonImage.alt = "muteButton";
     muteButton.appendChild(muteButtonImage);

@@ -11,6 +11,7 @@ export class QuestionButton {
 
   render() {
     const button = document.createElement("button");
+    button.classList.add("button");
     button.classList.add("answers__option");
     button.classList.add(`answers__option--${this.index}`);
     button.innerHTML = `<span class="index option-index-${this.index}">${this.index}: </span>${this.answer}`;
