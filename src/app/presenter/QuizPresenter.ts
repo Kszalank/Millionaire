@@ -12,6 +12,7 @@ export class QuizPresenter {
   timer: Timer | null = null;
   numberOfQuestions: number | null = null;
   audio: Audio | null = null;
+  selectedAnswer: string | null = null;
 
   constructor() {
     this.quiz = new QuizModel(questionsList);
@@ -34,8 +35,12 @@ export class QuizPresenter {
 
     if (currentQuestion) {
       this.questionPresenter = new QuestionPresenter(currentQuestion, (answer) => {
-        this.checkAnswer(answer);
-        this.timer!.resetTimer();
+        this.selectedAnswer = answer;
+        this.ColorSelectedAnswer();
+        setTimeout(() => {
+          this.checkAnswer(answer);
+          this.timer!.resetTimer();
+        }, 2000);
       });
       this.questionPresenter.initialize();
     }
@@ -66,8 +71,12 @@ export class QuizPresenter {
 
     if (currentQuestion) {
       this.questionPresenter = new QuestionPresenter(currentQuestion, (answer) => {
-        this.checkAnswer(answer);
-        this.timer!.resetTimer();
+        this.selectedAnswer = answer;
+        this.ColorSelectedAnswer();
+        setTimeout(() => {
+          this.checkAnswer(answer);
+          this.timer!.resetTimer();
+        }, 2000);
       });
       this.questionPresenter.initialize();
     }
@@ -77,8 +86,11 @@ export class QuizPresenter {
     if (this.quiz?.isCorrectAnswerToCurrentQuestion(answer)) {
       this.numberOfCorrectlyAnsweredQuestions!++;
       if (this.numberOfCorrectlyAnsweredQuestions === 15) {
-        this.audio?.correctAnswerSound();
-        alert("YOU HAVE WON 1.000.000 $");
+        setTimeout(() => {
+          this.ColorRightAnswer();
+          this.audio?.correctAnswerSound();
+          alert("YOU HAVE WON 1.000.000 $");
+        }, 2000);
       }
       if (this.numberOfCorrectlyAnsweredQuestions === 14) {
         this.audio?.finalAnswerTheme();
@@ -86,14 +98,26 @@ export class QuizPresenter {
       if (questionsList.length === 0) {
         alert("NO MORE QUESTIONS");
       } else {
-        this.audio?.correctAnswerSound();
-        this.destroyPreviousAndInitializeNextQuestion();
-        this.showingCurrentQuestionOnPriceList();
+        setTimeout(() => {
+          this.ColorRightAnswer();
+          this.audio?.correctAnswerSound();
+        }, 2000);
+
+        setTimeout(() => {
+          this.destroyPreviousAndInitializeNextQuestion();
+          this.showingCurrentQuestionOnPriceList();
+        }, 4000);
       }
     } else {
-      this.audio?.wrongAnswerSound();
-      this.showWonPrice();
-      this.quiz?.stopQuiz();
+      setTimeout(() => {
+        this.ColorWrongAnswer();
+        this.audio?.wrongAnswerSound();
+      }, 2000);
+
+      setTimeout(() => {
+        this.showWonPrice();
+        this.quiz?.stopQuiz();
+      }, 4000);
     }
   }
 
@@ -206,6 +230,72 @@ export class QuizPresenter {
     acceptButton.addEventListener("click", () => {
       lifeLineWindow.remove();
       this.audio?.mainTheme();
+    });
+  }
+
+  ColorSelectedAnswer() {
+    const BUT = document.getElementsByClassName("button");
+    var arr = [...BUT];
+    arr.forEach((answer, index) => {
+      if (document.getElementsByClassName("button")[index].children[1].innerHTML === this.selectedAnswer) {
+        const Q = document.getElementsByClassName("button")[index];
+        Q.id = "selected";
+        const W = document.getElementById("selected");
+        console.log(W);
+        console.log(Q);
+        if (W) W.style.background = "#e1a02e";
+      }
+    });
+  }
+
+  ColorWrongAnswer() {
+    const currentQuestion = this.quiz?.getCurrentQuestion();
+    const BUT = document.getElementsByClassName("button");
+    var arr = [...BUT];
+    arr.forEach((answer, index) => {
+      if (document.getElementsByClassName("button")[index].children[1].innerHTML === this.selectedAnswer) {
+        const Q = document.getElementsByClassName("button")[index];
+        Q.id = "selected";
+        const W = document.getElementById("selected");
+        console.log(W);
+        console.log(Q);
+        if (W) {
+          W.style.background = "red";
+          W.style.borderColor = "darkred";
+        }
+      }
+      if (
+        document.getElementsByClassName("button")[index].children[1].innerHTML ===
+        currentQuestion?.getQuestionData().rightAnswer
+      ) {
+        const Q = document.getElementsByClassName("button")[index];
+        Q.id = "right";
+        const W = document.getElementById("right");
+        console.log(W);
+        console.log(Q);
+        if (W) {
+          W.style.background = "green";
+          W.style.borderColor = "darkgreen";
+        }
+      }
+    });
+  }
+
+  ColorRightAnswer() {
+    const BUT = document.getElementsByClassName("button");
+    var arr = [...BUT];
+    arr.forEach((answer, index) => {
+      if (document.getElementsByClassName("button")[index].children[1].innerHTML === this.selectedAnswer) {
+        const Q = document.getElementsByClassName("button")[index];
+        Q.id = "selected";
+        const W = document.getElementById("selected");
+        console.log(W);
+        console.log(Q);
+        if (W) {
+          W.style.background = "green";
+          W.style.borderColor = "darkgreen";
+        }
+      }
     });
   }
 }

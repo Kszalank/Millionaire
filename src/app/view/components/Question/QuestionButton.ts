@@ -14,7 +14,7 @@ export class QuestionButton {
     button.classList.add("button");
     button.classList.add("answers__option");
     button.classList.add(`answers__option--${this.index}`);
-    button.innerHTML = `<span class="index option-index-${this.index}">${this.index}: </span>${this.answer}`;
+    button.innerHTML = `<span class="index option-index-${this.index}">${this.index}: </span><span>${this.answer}</span>`;
     button.addEventListener("click", () => this.onAnswerClick(this.answer));
 
     return button;
