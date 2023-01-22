@@ -31,7 +31,7 @@ export class QuizPresenter {
     this.showingCurrentQuestionOnPriceList();
     this.timer = new Timer();
     const left = document.getElementsByClassName("left");
-    // left[0].appendChild(this.timer.render());
+    left[0].appendChild(this.timer.render());
 
     if (currentQuestion) {
       this.questionPresenter = new QuestionPresenter(currentQuestion, (answer) => {
@@ -39,7 +39,6 @@ export class QuizPresenter {
         this.ColorSelectedAnswer();
         setTimeout(() => {
           this.checkAnswer(answer);
-          this.timer!.resetTimer();
         }, 2000);
       });
       this.questionPresenter.initialize();
@@ -75,7 +74,6 @@ export class QuizPresenter {
         this.ColorSelectedAnswer();
         setTimeout(() => {
           this.checkAnswer(answer);
-          this.timer!.resetTimer();
         }, 2000);
       });
       this.questionPresenter.initialize();
@@ -105,6 +103,7 @@ export class QuizPresenter {
 
         setTimeout(() => {
           this.destroyPreviousAndInitializeNextQuestion();
+          this.timer!.resetTimer();
           this.showingCurrentQuestionOnPriceList();
         }, 4000);
       }
@@ -125,18 +124,21 @@ export class QuizPresenter {
     const PriceList = document.getElementsByClassName("price-list");
     if (this.numberOfCorrectlyAnsweredQuestions! < 5) {
       alert("YOU WON 0 $");
+      this.endOfGameWindow();
     } else if (this.numberOfCorrectlyAnsweredQuestions! >= 5 && this.numberOfCorrectlyAnsweredQuestions! < 10) {
       alert(
         "WRONG ANSWER - WON GUARANTEED PRICE " +
           PriceList[0].children[PriceList[0].children.length - 5].children[0].innerHTML +
           " $"
       );
+      this.endOfGameWindow();
     } else if (this.numberOfCorrectlyAnsweredQuestions! >= 10) {
       alert(
         "WRONG ANSWER - WON GUARANTEED PRICE " +
           PriceList[0].children[PriceList[0].children.length - 10].children[0].innerHTML +
           " $"
       );
+      this.endOfGameWindow();
     }
   }
 
@@ -174,6 +176,7 @@ export class QuizPresenter {
     const currentQuestion = this.quiz?.getCurrentQuestion();
     const lifeLineWindow = document.createElement("div");
     const correctAnswer = document.createElement("div");
+
     const acceptButton = document.createElement("button");
     const mid = document.getElementsByClassName("mid");
     lifeLineWindow.style.position = "absolute";
@@ -194,10 +197,10 @@ export class QuizPresenter {
     correctAnswer.style.left = "12.5%";
     correctAnswer.style.background = "#071319";
     correctAnswer.style.border = "1px solid #e1a02e";
-    correctAnswer.style.borderRadius = "50px";
+    // correctAnswer.style.borderRadius = "50px";
     correctAnswer.style.textAlign = "center";
-    correctAnswer.style.justifyContent = "center";
-    correctAnswer.style.alignContent = "center";
+    correctAnswer.style.justifyContent = "space-around";
+    correctAnswer.style.alignContent = "flex-start";
     correctAnswer.style.fontFamily = "Inter";
     correctAnswer.style.color = "#e1a02e";
 
@@ -207,8 +210,66 @@ export class QuizPresenter {
         correctAnswer.innerText =
           "I think that " + currentQuestion?.getQuestionData().rightAnswer + " is the right answer";
       } else {
-        correctAnswer.innerText =
-          "Audience thinks that " + currentQuestion?.getQuestionData().rightAnswer + " is the right answer";
+        const answerAColumn = document.createElement("div");
+        const answerBColumn = document.createElement("div");
+        const answerCColumn = document.createElement("div");
+        const answerDColumn = document.createElement("div");
+        const chanceToGetRightAnswer = 20;
+        const random = chanceToGetRightAnswer + Math.floor(Math.random() * (100 - chanceToGetRightAnswer));
+        const random1 = Math.floor(Math.random() * (100 - random));
+        console.log("random1 = " + (100 - random));
+        const random2 = Math.floor(Math.random() * (100 - random - random1));
+        console.log("random2 = " + (100 - random - random1));
+        const random3 = 100 - random - random1 - random2;
+        console.log("random3 = " + (100 - random - random1 - random2));
+        console.log(
+          random + " " + random1 + " " + random2 + " " + random3 + "SUMA " + (random + random1 + random2 + random3)
+        );
+        const columnWidth = "10%";
+        const columnPosition = "relative";
+        const columnBackground = "#e1a02e";
+        answerAColumn.style.position = columnPosition;
+        answerAColumn.style.width = columnWidth;
+        answerAColumn.style.height = `${random}px`;
+        answerAColumn.style.top;
+        answerAColumn.style.left = "0";
+        answerAColumn.style.background = columnBackground;
+        answerAColumn.style.color = "black";
+        answerAColumn.innerText = random + "";
+
+        answerBColumn.style.position = columnPosition;
+        answerBColumn.style.width = columnWidth;
+        answerAColumn.style.height = `${random1}px`;
+        answerBColumn.style.top;
+        answerBColumn.style.left;
+        answerBColumn.style.background = columnBackground;
+        answerBColumn.style.color = "black";
+        answerBColumn.innerText = random1 + "";
+
+        answerCColumn.style.position = columnPosition;
+        answerCColumn.style.width = columnWidth;
+        answerCColumn.style.height = `${random2}px`;
+        answerCColumn.style.top;
+        answerCColumn.style.left;
+        answerCColumn.style.background = columnBackground;
+        answerCColumn.style.color = "black";
+        answerCColumn.innerText = random2 + "";
+
+        answerDColumn.style.position = columnPosition;
+        answerDColumn.style.width = columnWidth;
+        answerDColumn.style.height = `${random3}px`;
+        answerDColumn.style.top;
+        answerDColumn.style.left;
+        answerDColumn.style.background = columnBackground;
+        answerDColumn.style.color = "black";
+        answerDColumn.innerText = random3 + "";
+
+        correctAnswer.appendChild(answerAColumn);
+        correctAnswer.appendChild(answerBColumn);
+        correctAnswer.appendChild(answerCColumn);
+        correctAnswer.appendChild(answerDColumn);
+        // correctAnswer.innerText =
+        //   "Audience thinks that " + currentQuestion?.getQuestionData().rightAnswer + " is the right answer";
       }
     }
 
@@ -234,68 +295,105 @@ export class QuizPresenter {
   }
 
   ColorSelectedAnswer() {
-    const BUT = document.getElementsByClassName("button");
-    var arr = [...BUT];
-    arr.forEach((answer, index) => {
+    const allButtons = document.getElementsByClassName("button");
+    var buttonsArray = [...allButtons];
+    buttonsArray.forEach((answer, index) => {
       if (document.getElementsByClassName("button")[index].children[1].innerHTML === this.selectedAnswer) {
-        const Q = document.getElementsByClassName("button")[index];
-        Q.id = "selected";
-        const W = document.getElementById("selected");
-        console.log(W);
-        console.log(Q);
-        if (W) W.style.background = "#e1a02e";
+        const selectedButton = document.getElementsByClassName("button")[index];
+        selectedButton.id = "selected";
+        const selectedButtonId = document.getElementById("selected");
+        if (selectedButtonId) {
+          console.log(selectedButton);
+          selectedButtonId.style.background = "#e1a02e";
+          selectedButtonId.style.color = "black";
+          const answerIndex = document.getElementsByClassName("button")[index].children[0];
+          answerIndex.id = "selectedIndex";
+          const answerIndexId = document.getElementById("selectedIndex");
+          if (answerIndexId) {
+            answerIndexId.style.color = "white";
+          }
+          console.log(answerIndex);
+        }
       }
     });
   }
 
   ColorWrongAnswer() {
     const currentQuestion = this.quiz?.getCurrentQuestion();
-    const BUT = document.getElementsByClassName("button");
-    var arr = [...BUT];
-    arr.forEach((answer, index) => {
+    const allButtons = document.getElementsByClassName("button");
+    var buttonsArray = [...allButtons];
+    buttonsArray.forEach((answer, index) => {
       if (document.getElementsByClassName("button")[index].children[1].innerHTML === this.selectedAnswer) {
-        const Q = document.getElementsByClassName("button")[index];
-        Q.id = "selected";
-        const W = document.getElementById("selected");
-        console.log(W);
-        console.log(Q);
-        if (W) {
-          W.style.background = "red";
-          W.style.borderColor = "darkred";
+        const selectedButton = document.getElementsByClassName("button")[index];
+        selectedButton.id = "selected";
+        const selectedButtonId = document.getElementById("selected");
+
+        if (selectedButtonId) {
+          selectedButtonId.style.background = "red";
+          selectedButtonId.style.borderColor = "darkred";
         }
       }
       if (
         document.getElementsByClassName("button")[index].children[1].innerHTML ===
         currentQuestion?.getQuestionData().rightAnswer
       ) {
-        const Q = document.getElementsByClassName("button")[index];
-        Q.id = "right";
-        const W = document.getElementById("right");
-        console.log(W);
-        console.log(Q);
-        if (W) {
-          W.style.background = "green";
-          W.style.borderColor = "darkgreen";
+        const selectedButton = document.getElementsByClassName("button")[index];
+        selectedButton.id = "rightAnswer";
+        const selectedButtonId = document.getElementById("rightAnswer");
+        if (selectedButtonId) {
+          selectedButtonId.style.background = "green";
+          selectedButtonId.style.borderColor = "darkgreen";
         }
       }
     });
   }
 
   ColorRightAnswer() {
-    const BUT = document.getElementsByClassName("button");
-    var arr = [...BUT];
-    arr.forEach((answer, index) => {
+    const allButtons = document.getElementsByClassName("button");
+    var buttonsArray = [...allButtons];
+    buttonsArray.forEach((answer, index) => {
       if (document.getElementsByClassName("button")[index].children[1].innerHTML === this.selectedAnswer) {
-        const Q = document.getElementsByClassName("button")[index];
-        Q.id = "selected";
-        const W = document.getElementById("selected");
-        console.log(W);
-        console.log(Q);
-        if (W) {
-          W.style.background = "green";
-          W.style.borderColor = "darkgreen";
+        const selectedButton = document.getElementsByClassName("button")[index];
+        selectedButton.id = "selected";
+        const selectedButtonId = document.getElementById("selected");
+        if (selectedButtonId) {
+          selectedButtonId.style.background = "green";
+          selectedButtonId.style.borderColor = "darkgreen";
         }
       }
     });
+  }
+
+  endOfGameWindow() {
+    const endWindow = document.createElement("div");
+    const mid = document.getElementsByClassName("mid");
+    const restartButton = document.createElement("button");
+    const priceInfo = document.createElement("div");
+    endWindow.style.position = "absolute";
+    endWindow.style.width = "50%";
+    endWindow.style.height = "50%";
+    endWindow.style.top = "25%";
+    endWindow.style.left = "25%";
+    endWindow.style.background = "red";
+    endWindow.style.border = "1px solid #e1a02e";
+    endWindow.style.borderRadius = "50px";
+    restartButton.style.position = "relative";
+    restartButton.style.width = "25%";
+    restartButton.style.height = "10%";
+    restartButton.style.top = "40%";
+    restartButton.style.left = "0";
+    restartButton.style.background = "#071319";
+    restartButton.style.border = "1px solid #e1a02e";
+    restartButton.style.borderRadius = "50px";
+    restartButton.style.fontFamily = "Inter";
+    restartButton.style.color = "#e1a02e";
+    restartButton.innerText = "Thank you";
+
+    endWindow.appendChild(priceInfo);
+    endWindow.appendChild(restartButton);
+    restartButton.addEventListener("click", () => {
+      location.reload();
+    });
+    mid[0].appendChild(endWindow);
   }
 }

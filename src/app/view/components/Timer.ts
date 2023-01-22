@@ -1,6 +1,8 @@
 type Timing = Timer;
 export class Timer {
   currentTime: number | null = null;
+  timerSpan: HTMLSpanElement | null = null;
+  stopTime: number | null = null;
   constructor() {}
 
   resetTimer() {
@@ -23,12 +25,13 @@ export class Timer {
     timer.appendChild(secondCircle);
     timer.appendChild(middleCircle);
     timer.appendChild(hiddenCircle);
-    const timerSpan = document.createElement("span");
-    timerSpan.classList.add("time");
-    timerSpan.innerHTML = "" + this.currentTime;
-    timer.appendChild(timerSpan);
+    this.timerSpan = document.createElement("span");
+    this.timerSpan?.classList.add("time");
+    this.timerSpan.innerHTML = "" + this.currentTime;
+    timer.appendChild(this.timerSpan);
     const interval = setInterval(() => {
       this.currentTime!--;
+      this.stopTime = this.currentTime;
       const remainingTime = 45 - this.currentTime!;
       secondCircle.style.transform = `rotate(${-180 + remainingTime * 8}deg)`;
       if (remainingTime < 22.5) {
@@ -43,7 +46,7 @@ export class Timer {
         hiddenCircle.style.transform = `rotate(${remainingTime * 8}deg)`;
         hiddenCircle.style.zIndex = "" + 4;
       }
-      timerSpan.innerHTML = "" + this.currentTime;
+      if (this.timerSpan) this.timerSpan.innerHTML = "" + this.currentTime;
 
       if (this.currentTime! === 0) {
         alert("NO TIME LEFT, YOU LOST");
