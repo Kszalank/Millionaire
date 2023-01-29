@@ -31,7 +31,7 @@ body {
   text-align: center;
 }
 
-.C1 {
+.circle1 {
   position: absolute;
   top: -10px;
   left: -10px;
@@ -43,7 +43,7 @@ body {
   transform-origin: right center;
   z-index: 5;
 }
-.C2 {
+.circle2 {
   background: #071319;
   position: absolute;
   top: -10px;
@@ -57,7 +57,7 @@ body {
   z-index: 1;
 }
 
-.C3 {
+.circle3 {
   background: #071319;
   position: absolute;
   width: 100px;
@@ -65,7 +65,7 @@ body {
   height: 100px;
   z-index: 10;
 }
-.C4 {
+.circle4 {
   background: #071319;
   position: absolute;
   top: -10px;
@@ -196,4 +196,13 @@ body {
       color: #ffffff;
     }
   }
+}
+
+.previousQuestion {
+  color: green;
+  padding: 0px;
+  background-color: #071319;
+  border-radius: 0px;
+  width: "fit-content";
+  font-family: "Inter";
 }

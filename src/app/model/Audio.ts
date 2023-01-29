@@ -1,9 +1,9 @@
-import correctAnswer from "../../assets/audio/correct_answer.mp3";
-import finalAnswer from "../../assets/audio/final_answer.mp3";
-import letsPlay from "../../assets/audio/lets_play.mp3";
-import mainTheme from "../../assets/audio/Main_Theme.mp3";
-import phoneFriend from "../../assets/audio/phone_friend.mp3";
-import wrongAnswer from "../../assets/audio/wrong_answer.mp3";
+import correctAnswer from "../../assets/audio/correctAnswer.mp3";
+import finalAnswer from "../../assets/audio/finalAnswer.mp3";
+import letsPlay from "../../assets/audio/letsPlay.mp3";
+import mainTheme from "../../assets/audio/MainTheme.mp3";
+import phoneFriend from "../../assets/audio/phoneFriend.mp3";
+import wrongAnswer from "../../assets/audio/wrongAnswer.mp3";
 import unmuteIcon from "../../assets/img/unmute.svg";
 import muteIcon from "../../assets/img/mute.svg";
 
@@ -62,11 +62,11 @@ export class Audio {
   }
   muteAudio() {
     const muteImage: HTMLImageElement | null = document.images.namedItem("mute");
-    if (this.muted === false) {
+    if (!this.muted) {
       this.muted = true;
       if (muteImage) muteImage.src = unmuteIcon;
       this.audio?.pause();
-    } else if (this.muted === true) {
+    } else {
       this.muted = false;
       if (muteImage) muteImage.src = muteIcon;
       this.mainTheme();

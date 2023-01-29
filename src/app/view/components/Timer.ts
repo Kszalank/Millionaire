@@ -1,3 +1,5 @@
+import { EndGameWindow } from "../../model/EndingWindow";
+
 type Timing = Timer;
 export class Timer {
   currentTime: number | null = null;
@@ -10,6 +12,7 @@ export class Timer {
   }
 
   render() {
+    const endWindow = new EndGameWindow();
     this.currentTime = 45;
     const timer = document.createElement("div");
     timer.classList.add("timer");
@@ -17,10 +20,10 @@ export class Timer {
     const secondCircle = document.createElement("div");
     const middleCircle = document.createElement("div");
     const hiddenCircle = document.createElement("div");
-    firstCircle.classList.add("C1");
-    secondCircle.classList.add("C2");
-    middleCircle.classList.add("C3");
-    hiddenCircle.classList.add("C4");
+    firstCircle.classList.add("circle1");
+    secondCircle.classList.add("circle2");
+    middleCircle.classList.add("circle3");
+    hiddenCircle.classList.add("circle4");
     timer.appendChild(firstCircle);
     timer.appendChild(secondCircle);
     timer.appendChild(middleCircle);
@@ -49,8 +52,13 @@ export class Timer {
       if (this.timerSpan) this.timerSpan.innerHTML = "" + this.currentTime;
 
       if (this.currentTime! === 0) {
-        alert("NO TIME LEFT, YOU LOST");
-        clearInterval(interval);
+        endWindow.openWindow();
+        const wonPriceInfo = document.getElementById("endPriceWindow");
+
+        if (wonPriceInfo) {
+          wonPriceInfo.innerHTML = "NO TIME LEFT, YOU LOST";
+          clearInterval(interval);
+        }
       }
     }, 1000);
     return timer;
