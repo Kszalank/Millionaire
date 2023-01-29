@@ -137,22 +137,14 @@ export class QuizPresenter {
     if (previousQuestion) {
       previousQuestion.id = "previousQuestion";
       const previousQuestionId = document.getElementById("previousQuestion");
-      previousQuestion.className = "previousQuestion";
+
       if (previousQuestionId) {
-        previousQuestionId.style.color = "green";
-        previousQuestionId.style.padding = "0px";
-        previousQuestionId.style.backgroundColor = "071319";
-        previousQuestionId.style.borderRadius = "0px";
-        previousQuestionId.style.width = "fit-content";
+        previousQuestionId.className = "previousQuestion";
       }
     }
 
     if (currentQuestionId) {
-      currentQuestionId.style.color = "white";
-      currentQuestionId.style.padding = "10px";
-      currentQuestionId.style.backgroundColor = "e1a02e";
-      currentQuestionId.style.borderRadius = "20px";
-      currentQuestionId.style.width = "fit-content";
+      currentQuestionId.className = "currentQuestion";
     }
   }
 
