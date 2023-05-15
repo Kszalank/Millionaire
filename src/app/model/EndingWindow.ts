@@ -1,4 +1,3 @@
-type End = EndGameWindow;
 export class EndGameWindow {
   openWindow() {
     const endWindow = document.createElement("div");

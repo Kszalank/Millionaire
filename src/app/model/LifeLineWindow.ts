@@ -1,4 +1,3 @@
-type LLWindow = LifeLineWindowClass;
 export class LifeLineWindowClass {
   openLifeLineWindow() {
     const lifeLineWindow = document.createElement("div");

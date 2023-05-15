@@ -25,7 +25,6 @@ export class QuizPresenter {
     this.audio = new Audio();
     this.audio.start();
     const muteButton = document.getElementsByClassName("sound");
-    const muteButtonImage = document.getElementById("mute");
     muteButton[0].addEventListener("click", () => {
       this.audio?.muteAudio();
     });
@@ -253,8 +252,6 @@ export class QuizPresenter {
         const selectedButton = document.getElementsByClassName("button")[index];
         selectedButton.id = "selected";
         const selectedButtonId = document.getElementById("selected");
-        console.log(selectedButton);
-        console.log(selectedButtonId);
         if (selectedButtonId) {
           selectedButtonId.style.background = "#e1a02e";
           selectedButtonId.style.color = "black";
@@ -301,7 +298,7 @@ export class QuizPresenter {
 
   colorRightAnswer() {
     const allButtons = document.getElementsByClassName("button");
-    var buttonsArray = [...allButtons];
+    const buttonsArray = [...allButtons];
     buttonsArray.forEach((answer, index) => {
       if (document.getElementsByClassName("button")[index].children[1].innerHTML === this.selectedAnswer) {
         const selectedButton = document.getElementsByClassName("button")[index];
