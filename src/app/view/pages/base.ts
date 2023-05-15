@@ -22,7 +22,11 @@ export class Base {
     mid.appendChild(lifeRings);
     const logo = document.createElement("div");
     logo.classList.add("logo");
-    logo.innerHTML = `<img src=${backgroundLogo} alt="logo">`;
+    const logoImage = document.createElement("img");
+    logoImage.classList.add("logo-image");
+    logoImage.src = backgroundLogo;
+    logoImage.alt = "logo";
+    logo.appendChild(logoImage);
     mid.appendChild(logo);
     right.classList.add("right");
     document.body.appendChild(right);
