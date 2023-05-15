@@ -1,6 +1,5 @@
 import backgroundLogo from "../../../assets/img/background_logo.svg";
 import { AudioToggle } from "../components/AudioToggle";
-import { Timer } from "../components//Timer";
 import { LifeRings } from "../components/Lifelines/LifelineButton";
 import { MoneyPrizeList } from "../components/MoneyPrizeList/MoneyPrizeList";
 import { debug } from "./temp";
@@ -13,19 +12,21 @@ export class Base {
 
   static render() {
     const audioToggle = AudioToggle.render();
-    const timer = Timer.render();
     const lifeRings = LifeRings.render();
     const moneyPrizeList = MoneyPrizeList.render();
     left.classList.add("left");
     document.body.appendChild(left);
     left.appendChild(audioToggle);
-    left.appendChild(timer);
     mid.classList.add("mid");
     document.body.appendChild(mid);
     mid.appendChild(lifeRings);
     const logo = document.createElement("div");
     logo.classList.add("logo");
-    logo.innerHTML = `<img src=${backgroundLogo} alt="logo">`;
+    const logoImage = document.createElement("img");
+    logoImage.classList.add("logo-image");
+    logoImage.src = backgroundLogo;
+    logoImage.alt = "logo";
+    logo.appendChild(logoImage);
     mid.appendChild(logo);
     right.classList.add("right");
     document.body.appendChild(right);
